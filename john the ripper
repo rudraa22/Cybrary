@@ -1,0 +1,61 @@
+# John the Ripper (JtR)
+
+## What it is
+John the Ripper is an open-source password cracking tool used in security
+audits and digital forensics to test password strength. It supports many
+hash types (Unix crypt, Windows NTLM, MD5, SHA, etc.) and is commonly used
+alongside tools like Hashcat in authorized penetration testing and CTFs.
+
+## Common use cases
+- Auditing password strength on systems you own/are authorized to test
+- Cracking hashes recovered during forensic investigations (e.g., from
+  /etc/shadow on Linux, or SAM file on Windows)
+- CTF challenges involving password hash cracking
+
+## Basic workflow
+
+1. **Identify the hash**
+   Use a tool like `hashid` or `john --list=formats` to figure out what
+   hash type you're dealing with.
+
+2. **Run a basic crack (dictionary attack)**
+   ```
+   john --wordlist=rockyou.txt hashes.txt
+   ```
+
+3. **Show cracked passwords**
+   ```
+   john --show hashes.txt
+   ```
+
+4. **Incremental/brute-force mode** (tries all character combos — slow)
+   ```
+   john --incremental hashes.txt
+   ```
+
+5. **Specify a format explicitly** (useful when auto-detect is wrong)
+   ```
+   john --format=raw-md5 hashes.txt
+   ```
+
+## Key flags
+| Flag | Purpose |
+|------|---------|
+| `--wordlist=` | Dictionary attack using a wordlist file |
+| `--rules` | Apply mangling rules to wordlist (e.g. add numbers/symbols) |
+| `--format=` | Force a specific hash format |
+| `--show` | Display cracked results from session |
+| `--session=` | Name a session so it can be resumed later |
+
+## Notes / gotchas
+- Always confirm hash format before running — wrong format wastes time.
+- `rockyou.txt` is the most common starter wordlist (comes with Kali).
+- JtR is CPU-based; Hashcat is GPU-based and much faster for large jobs —
+  worth comparing the two for bigger cracking jobs.
+- Legal use only: cracking hashes you don't have explicit authorization
+  for is illegal. This applies strictly to lab/CTF/owned-system contexts.
+
+## Related tools
+- Hashcat (GPU-accelerated alternative)
+- hashid / hash-identifier (detect hash type)
+- Hydra (online brute-force, different use case — network services vs offline hashes)
