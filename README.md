@@ -83,7 +83,7 @@ Whether you're a beginner finding your footing or a practitioner brushing up on 
 | Exploitation | Metasploit Framework | CVE-based exploitation |
 | Password Cracking | Hashcat, John the Ripper | Offline hash cracking |
 | Wireless Security | Aircrack-ng | WPA/WPA2 testing |
-| Post-Exploitation | Mimikatz, Empire | Privilege escalation & persistence |
+| Post-Exploitation | Mimikatz, Empire | Privilege escalation & persistence |||
 
 ---
 
